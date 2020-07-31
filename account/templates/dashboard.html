@@ -117,26 +117,40 @@
                         <th>USER</th>
                         <th>DATE</th>
                         <th>LANDMARK</th>
+                        <th>DISTRICT</th>
                         <th>SUGGESTION</th>
                         <th>IMAGE</th>
                         <th>LOD</th>
-                        <th>Assign</th>
-                        <th>status</th>
+                        <th>ASSIGN</th>
+                        <th>CONTRACTOR</th>
+                        <th>STATUS</th>
+                        <th>DELETE</th>
+                        <th>RATE WORK</th>
                     </tr>
                     {% for getdata in Dashboard %}
+                    <form method="POST" action="{% url 'rate' getdata.contr  %}">
+                         {% csrf_token %}
                     <tr>
                         <td>{{getdata.id}}</td>
                         <td>{{getdata.user}}</td>
                         <td>{{getdata.date}}</td>
-                        <td>{{getdata.near}}</td>
+                        <td>{{getdata.land}}</td>
+                        <td>{{getdata.dist}}</td>
                         <td>{{getdata.sug}}</td>
                         <td><a href="/media/{{getdata.url}}" target="_blank">download</a></td>
                         <td>{{getdata.lod}}</td>
                         <td><a href="{% url 'assignwork' getdata.id %}">PUSH</a>
                             <a href="{% url 'showinterest' %}">show</a>
                         </td>
+                        <td>{{getdata.contr}}</td>
                         <td>{{getdata.status}}</td>
+                        <td><a href="{% url 'delete' getdata.id %}">delete</a></tb>
+                        <td>
+                            <input type="number" placeholder="0" name="rate" min="1" max="5" required>
+                            <button class="btn btn-dark" type="submit">RATE</button>
+                        </td>
                     </tr>
+                    </form>
                     {% endfor %}
                     </table>
                     <!--/form-->

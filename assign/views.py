@@ -17,23 +17,35 @@ def assignment(request,getdata_id):
     count=len(contrecord)
     newrecord=Dashboard.objects.filter(id=getdata_id)
     for i in range(count):
-        assignrecord=assignwork(cemail=contrecord[i].cemail,
-            adate=newrecord[0].date,
-            alat=newrecord[0].lat,
-            alon=newrecord[0].lon,
-            anear=newrecord[0].near,
-            aurl=newrecord[0].url,
-            alod=3,
-            aoption=1,
-            astatus=1)
+        assignrecord=assignwork(email=contrecord[i].cemail,
+            cid=newrecord[0].id,
+            date=newrecord[0].date,
+            lat=newrecord[0].lat,
+            lon=newrecord[0].lon,
+            land=newrecord[0].land,
+            dist=newrecord[0].dist,
+            url=newrecord[0].url,
+            lod=newrecord[0].lod,
+            choice='choice',
+            status='not assigned',
+            deadline=newrecord[0].date,
+            budget=0)
         assignrecord.save()
     return render(request,"message.html") 
 
 def interest(request):
-    record=assignwork.objects.filter(aoption=0)
+    record=assignwork.objects.filter(choice='not interested')
     record.delete()
     result=assignwork.objects.all()
     return render(request,"show_int.html",{'assignwork':result})
+
+def budget(request):
+    if request.method=="POST":
+        dash = Dashboard()
+        dash.budget=request.POST.get('bug')
+        dash.deadline=request.POST.get('deadline')
+        dash.save()
+    return render(request,"dashboard.html")
    
 
 

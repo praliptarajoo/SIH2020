@@ -9,6 +9,7 @@ class newcontract(models.Model):
     cphn = models.CharField(max_length=20)
     cloc = models.CharField(max_length=50)
     cpassword = models.CharField(max_length=50)
+    rate = models.IntegerField(max_length=4)
     class Meta:
         db_table="contractor"
 

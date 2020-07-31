@@ -10,6 +10,8 @@ urlpatterns = [
     path('map/',views.map,name='map'),
     path('sort/<int:val>',views.sort,name="sort"),
     path('filter/',views.filter,name='filter'),
+    path('contrassign/<mail>/<int:cid>',views.contrassign,name='contrassign'),
+    path('delete/<int:id>',views.delete,name='delete'),
 
     
     #path('newcontract/',views.insert,name='newcontract'),

@@ -81,16 +81,32 @@
                     </hr>
                     <table border="1" class="table table-striped table-in-card">
                     <tr>
-                        <th>MAIlID</th>
-                        <th>RATING</th>
+                        <th>CID</th>
+                        <th>MAILID</th>
+                        <th>CHOICE</th>
+                        <th>STATUS</th>
+                        <th>DEADLINE</th>
+                        <th>BUDGET</th>
+                        <th>FINAL</th>
                         <th>ASSIGN</th>
                     </tr>
                     {% for getdata in assignwork %}
+                    <form method="POST" action="{% url 'contrassign' getdata.email getdata.cid %}">
+                        {% csrf_token %}
                     <tr>
-                        <td>{{getdata.cemail}}</td>
-                        <td>5</td>
-                        <td><a>Allot</a></td>
+                        <td>{{getdata.cid}}</td>
+                        <td>{{getdata.email}}</td>
+                        <td>{{getdata.choice}}</td>
+                        <td>{{getdata.status}}</td>
+                        <td><input type="date" placeholder="date" name="date" required></td>
+                        <td>{{getdata.budget}}</td>
+                        <td><input type="text" placeholder="budget" name="bug" required>
+                        </td>
+                        <td><button type="submit">Assign</button>
+                        <!--a href="{% url 'asg_temp' %}">Task_data</a-->
+                        </td>
                     </tr>
+                    </form>
                     {% endfor %}
                     </table>       
                 </div>

@@ -9,5 +9,6 @@ urlpatterns = [
     path('clist/',views.displayList,name='clist'),
     path('message/',views.showmessage,name='message'),
     path('about/',views.about,name='about'),
-    path('statistics/',views.statistics,name='statistics')
+    path('statistics/',views.statistics,name='statistics'),
+    path('rate/<mail>',views.rate,name='rate'),
 ]

@@ -27,6 +27,7 @@ def insert(request):
       saverecord.cphn=request.POST.get('cphn')
       saverecord.cloc=request.POST.get('cloc')
       saverecord.cpassword='password'
+      saverecord.rate=0
       saverecord.save()
       subject = 'Welcome you to GADDHE as a contractor'
       message = 'Congratulations to be a part of "GADDHE". Your username='+x+',password=password. Click on the link http://padma.soumit.tech/index.php?uname='+x+' and reset your password.' 
@@ -58,6 +59,23 @@ def statistics(request):
     resultsdisplay=Dashboard.objects.order_by("-id")
     return render(request,"statistics.html",{'Dashboard':resultsdisplay})
   return render(request,"statistics.html")
+
+def rate(request,mail):
+  if request.method=="POST":
+    mod = newcontract.objects.get(cemail=mail)
+    mod.rate=request.POST.get('rate')
+    mod.save()
+    #record = newcontract(
+     # cname=mod[0].cname,
+      #cemail=mod[0].cemail,
+      #cphn=mod[0].cphn,
+      #cloc=mod[0].cloc,
+      #cpassword=mod[0].cpassword,
+      #rate=request.POST.get('rate'),)
+    #record.save()
+  return render(request,"dashboard.html")
+
+
 
 
 
